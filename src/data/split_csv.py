@@ -1,7 +1,5 @@
 '''split_csv.py - Split the raw csv: create training, validation and testing CSV files.'''
 
-import sys
-
 import pandas as pd
 import numpy as np
 
@@ -108,7 +106,7 @@ def split_save_data(df):
 
 
 def main():
-    data = f'{root}external/final_scout_not_dummy.csv'
+    data = f'{root}/external/final_scout_not_dummy.csv'
     
     df = pd.read_csv(data)
     df = remove_missing_data(df)
