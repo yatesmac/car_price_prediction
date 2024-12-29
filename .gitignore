@@ -169,3 +169,8 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Data files
+# They are deleted often in testing
+.csv
+.ckpt
