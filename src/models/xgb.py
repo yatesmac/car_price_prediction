@@ -11,7 +11,7 @@ from xgboost import XGBRegressor
 
 # sys.path lists directories that Python searches for modules to import
 sys.path.append('../data') 
-from dataset_preparation import dataset
+from data_preparation import dataset
 
 
 logger = logging.getLogger(__name__)
@@ -65,8 +65,8 @@ def main():
     '''Train, evaluate and save model.'''
     root = '../..'
     model_file = f'{root}/models/xgb.pkl'
-    train_csv = f'{root}/data/raw/train/df_full_train.csv'
-    test_csv = f'{root}/data/raw/test/df_test.csv'
+    train_csv = f'{root}/data/train/df_full_train.csv'
+    test_csv = f'{root}/data/test/df_test.csv'
     target = 'price'
 
     X_train, y_train, X_test, y_test = dataset(train_csv, test_csv, target)

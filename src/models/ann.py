@@ -11,7 +11,7 @@ from keras.layers import Dense, Dropout
 
 # sys.path lists directories that Python searches for modules to import
 sys.path.append('../data') 
-from datset_preparation import dataset
+from data_preparation import dataset
 
 
 SEED = 42
@@ -50,9 +50,9 @@ def train(X_train):
 
 def main():
     '''Train, evaluate and save model.'''
-    root = '../..'
-    train_csv = f'{root}/data/raw/train/df_full_train.csv'
-    test_csv = f'{root}/data/raw/test/df_test.csv'
+    root = '../..' # Root Directory
+    train_csv = f'{root}/data/train/df_full_train.csv'
+    test_csv = f'{root}/data/test/df_test.csv'
     model_path = f'{root}/models/ann_v1.h5'
     ckpt_path = '../../models/checkpoints/ann_v1_{epoch:02d}_{val_root_mean_squared_error:.3f}.ckpt'
     target = 'price'

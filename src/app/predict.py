@@ -1,36 +1,56 @@
-'''predict.py - Flask application'''
+'''
+predict.py - Flask application:
+Loads the XGBoost and Artificial Neural Network models and evaluates given data.
+'''
 import pickle
 
+from keras.models import load_model
 from flask import Flask, request, jsonify
 
 
-def load(model_file):
+def load_xgb(model_file):
     '''Load the pre-trained model and other necessary components'''
     with open(model_file, 'rb') as f:
         model = pickle.load(f)
     return model
 
 
-def train(X_data, y_data):
-    '''Process the data, make predictions using the model, and return the results'''
-    prediction = model.predict(X_data)
+def load_ann(model_file, weights):
+    model = load_model(model_file)
+    model.load_weights(weights)
+    return model
 
-    return {
-        'actual_value': y_data,
-        'prediction': float(prediction)
-    }
+
+def evaluate(model, data):
+    '''Process the data, make predictions using the model, and return the results'''
+    prediction = model.predict(data)
+    return float(prediction)
 
 
 app = Flask(__name__)
-model_file = '../../models/xgb.pkl'
-model = load(model_file=model_file)
-
 
 # Define the prediction endpoint
 @app.route('/predict', methods=['POST'])
 def predict():
+
+    root = '../../models' # Models root directory
+    model_file_xgb = f'{root}/xgb.pkl'
+    model_xgb = load_xgb(model_file_xgb)
+
+    model_file_ann = f'{root}/ann_v1.h5'
+    weights = f'{root}/checkpoints/ann_v1_.ckpt' # TODO: Specify weights
+    model_ann = load_ann(model_file_ann, weights)
+
+    models = [
+        ('XGB', model_xgb),
+        ('ANN', model_ann)
+    ]
+
     data = request.get_json()
-    results = train(data=data)
+    results = {}
+    for name, model in models:
+        results[name] = evaluate(model, data)
+        
     return jsonify(results)
 
 
