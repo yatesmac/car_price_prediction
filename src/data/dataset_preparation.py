@@ -1,8 +1,11 @@
-'''dataset_preparation contain functions for data transformation, before model training.'''
+'''dataset_preparation.py contain functions for data transformation, before model training.
+X_train, y_train, X_test, y_test are created using the dataset function.
+'''
 
 import pandas as pd
 import numpy as np
 
+from numpy.typing import NDArray
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
@@ -11,7 +14,7 @@ from sklearn.feature_extraction import DictVectorizer
 from flattencolumns import FlattenColumns
 
 
-def prepare_dataset(csv: pd.DataFrame, target: str) -> tuple[pd.DataFrame, pd.Series]:
+def prepare_dataset(csv, target: str) -> tuple[pd.DataFrame, pd.Series]:
     '''Create X and y data given a the csv file.'''
     df = pd.read_csv(csv)
     target = target
@@ -20,7 +23,7 @@ def prepare_dataset(csv: pd.DataFrame, target: str) -> tuple[pd.DataFrame, pd.Se
     return X, y
 
 
-def categorize(df: pd.DataFrame) -> tuple[str, str, str]:
+def categorize(df: pd.DataFrame) -> tuple[list[str], list[str], list[str]]:
     '''Defining column types.'''
     numerical = df.select_dtypes('number').columns.tolist()
     categorical = df.select_dtypes(include='object').columns.tolist()
@@ -33,7 +36,7 @@ def categorize(df: pd.DataFrame) -> tuple[str, str, str]:
     return categorical, numerical, multi_label
 
 
-def scale(X_train: pd.DataFrame, X_test: pd.DataFrame, numerical: list)\
+def scale(X_train: pd.DataFrame, X_test: pd.DataFrame, numerical: list[str])\
     -> tuple[pd.DataFrame, pd.DataFrame]:
     '''Apply Standard Scaler to numeric columns in X_train and X_test dataframes.'''
     transformer = ColumnTransformer(
@@ -48,8 +51,9 @@ def scale(X_train: pd.DataFrame, X_test: pd.DataFrame, numerical: list)\
     return X_train, X_test
 
 
-def vectorize(X_train: pd.DataFrame, X_test: pd.DataFrame, multi_label: list) -> tuple[np.ndarray, np.ndarray]:
-    '''Apply DictVectoizer to X_train and X_test dataframes'''
+def vectorize(X_train: pd.DataFrame, X_test: pd.DataFrame, multi_label: list[str])\
+    -> tuple[NDArray[any], NDArray[any]]:
+    '''Apply DictVectoizer to X_train and X_test dataframes.'''
     pipeline = Pipeline([
             ('flattern', FlattenColumns(multi_label)),
             ('vectorizer', DictVectorizer(sparse=False))  # returns dense array
@@ -58,7 +62,10 @@ def vectorize(X_train: pd.DataFrame, X_test: pd.DataFrame, multi_label: list) ->
     X_test = pipeline.transform(X_test)
     return X_train, X_test
 
-def dataset(train_csv, test_csv, target, scaler=False):
+
+def dataset(train_csv, test_csv, target: str, scaler: bool=False)\
+    -> tuple[pd.DataFrame, pd.Series, pd.DataFrame, pd.Series]:
+    '''Create X_train, y_train, X_test, y_test from train and test CSV files.'''
     X_train, y_train = prepare_dataset(train_csv, target)
     X_test, y_test = prepare_dataset(test_csv, target)
 

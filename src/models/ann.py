@@ -9,8 +9,9 @@ from tensorflow import keras
 from keras.models import Sequential
 from keras.layers import Dense, Dropout
 
+# sys.path lists directories that Python searches for modules to import
 sys.path.append('../data') 
-from datset_preparation import dataset, categorize, scale, vectorize
+from datset_preparation import dataset
 
 
 SEED = 42
@@ -28,38 +29,43 @@ logging.basicConfig(
 
 
 def train(X_train):
-    model = Sequential()
-    model.add(Dense(64, activation='relu',input_shape=(X_train.shape[1], )))
-    model.add(Dropout(0.15))
-    model.add(Dense(128, activation='relu'))
-    model.add(Dense(32, activation='relu'))
-    model.add(Dense(16, activation='relu'))
-    model.add(Dense(1))
+    '''Train a model using the provided data.'''
+    learning_rate = 0.01
+    optimizer = keras.optimizers.Adam(learning_rate=learning_rate)
+    loss = keras.losses.MeanSquaredError()
+    rmse = keras.metrics.RootMeanSquaredError()
+    model = Sequential(
+        [
+            Dense(64, activation='relu',input_shape=(X_train.shape[1], )),
+            Dense(128, activation='relu'),
+            Dropout(0.15),
+            Dense(32, activation='relu'),
+            Dense(16, activation='relu'),
+            Dense(1)
+        ]
+    )
+    model.compile(optimizer=optimizer, loss=loss, metrics=[rmse])
     return model
 
 
 def main():
     '''Train, evaluate and save model.'''
-    train_csv = '../../data/raw/train/df_full_train.csv'
-    test_csv = '../../data/raw/test/df_test.csv'
+    root = '../..'
+    train_csv = f'{root}/data/raw/train/df_full_train.csv'
+    test_csv = f'{root}/data/raw/test/df_test.csv'
+    model_path = f'{root}/models/ann_v1.h5'
+    ckpt_path = '../../models/checkpoints/ann_v1_{epoch:02d}_{val_root_mean_squared_error:.3f}.ckpt'
     target = 'price'
-    
-    X_train, y_train, X_test, y_test = dataset(train_csv, test_csv, target, scaler=True)
-    
-    learning_rate = 0.01
-    optimizer = keras.optimizers.Adam(learning_rate=learning_rate)
-    loss = keras.losses.MeanSquaredError()
-    rmse = keras.metrics.RootMeanSquaredError()
 
+    X_train, y_train, X_test, y_test = dataset(train_csv, test_csv, target, scaler=True)
     model = train(X_train)
-    model.compile(optimizer=optimizer, loss=loss, metrics=[rmse])
-    model.save_weights('model_v1.h5', save_format='h5')
+    model.save(model_path)
 
     checkpoint = keras.callbacks.ModelCheckpoint(
-        'ann_v1_{epoch:02d}_{val_root_mean_squared_error:.3f}.h5',
+        filepath=ckpt_path,
         save_best_only=True,
-        monitor='val_accuracy',
-        mode='max'
+        monitor='val_rmse',
+        mode='min'
     )
 
     return model.fit(

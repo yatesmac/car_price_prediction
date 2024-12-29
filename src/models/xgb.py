@@ -3,15 +3,15 @@
 import pickle
 import logging
 import sys
-
-import os.path
+import os
 
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import r2_score, root_mean_squared_error
 from xgboost import XGBRegressor
 
+# sys.path lists directories that Python searches for modules to import
 sys.path.append('../data') 
-from dataset_preparation import dataset, categorize, vectorize
+from dataset_preparation import dataset
 
 
 logger = logging.getLogger(__name__)
@@ -63,13 +63,13 @@ def save_model(model, model_file):
 
 def main():
     '''Train, evaluate and save model.'''
-    model_file = '../../models/xgb.pkl'
-    train_csv = '../../data/raw/train/df_full_train.csv'
-    test_csv = '../../data/raw/test/df_test.csv'
+    root = '../..'
+    model_file = f'{root}/models/xgb.pkl'
+    train_csv = f'{root}/data/raw/train/df_full_train.csv'
+    test_csv = f'{root}/data/raw/test/df_test.csv'
     target = 'price'
 
     X_train, y_train, X_test, y_test = dataset(train_csv, test_csv, target)
-
     model = train(X_train=X_train, y_train=y_train)
     r2, rmse = validate(model=model, X_test=X_test, y_test=y_test)
     logger.info(f'R2 Score = {r2}\nRMSE = {rmse}')

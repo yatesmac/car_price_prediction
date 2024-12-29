@@ -10,6 +10,10 @@ from sklearn.model_selection import train_test_split
 from dataset_preparation import categorize
 
 
+# Data root directory
+root = '../../data'
+
+
 def format_column_names(df):
     df.columns = df.columns.str.lower().str.replace(' ', '_').str.replace('-', '_', regex=True)
     return df
@@ -56,8 +60,7 @@ def remove_missing_data(df):
 
 
 def remove_outliers(df, target):
-    # Removing Outliers
-    # Inter Quartile Range
+    '''Removing Outliers using the Inter Quartile Range'''
     # Calculate the upper and lower limits
     Q1 = df[target].quantile(0.25)
     Q3 = df[target].quantile(0.75)
@@ -77,10 +80,10 @@ def remove_outliers(df, target):
 
 def split_save_data(df):
     '''
-    Split the Dataframe into 60%, 20%, 20% parts.
+    Split the dataframe into 60%, 20%, 20% parts.
     Create Training, Validation and Testing datasets.
     '''
-    # Split the Dataframe
+    # Split the dataframe
     df_full_train, df_test = train_test_split(df, test_size=0.2, random_state=42)
     df_train, df_val = train_test_split(df_full_train, test_size=0.25, random_state=42)
 
@@ -94,8 +97,8 @@ def split_save_data(df):
         (df_test, 'df_test')
         ]
 
-    train_dir = '../../data/raw/train'
-    test_dir = '../../data/raw/test'
+    train_dir = f'{root}/raw/train'
+    test_dir = f'{root}/raw/test'
 
     for df, df_name in train_dfs:
         df.to_csv(f'{train_dir}/{df_name}.csv', index=False)
@@ -105,13 +108,13 @@ def split_save_data(df):
 
 
 def main():
-    data = '../../data/external/final_scout_not_dummy.csv'
+    data = f'{root}external/final_scout_not_dummy.csv'
     
     df = pd.read_csv(data)
     df = remove_missing_data(df)
     df = remove_duplicates(df)
     df = format_column_names(df)
-    # df = remove_outliers(df, target)
+#   df = remove_outliers(df, target)
 
     categorical, numerical, multi_label = categorize(df)
 
