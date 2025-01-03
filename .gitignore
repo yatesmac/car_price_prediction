@@ -172,5 +172,5 @@ cython_debug/
 
 # Data files
 # They are deleted often in testing
-.csv
-.ckpt
+*.csv
+*.ckpt
