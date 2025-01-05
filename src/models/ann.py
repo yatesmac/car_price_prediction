@@ -18,12 +18,14 @@ SEED = 42
 np.random.seed(SEED)
 tf.random.set_seed(SEED)
 
+root = '../..'# Root Directory
+
 logger = logging.getLogger(__name__)
 logging.basicConfig(
     format='%(asctime)s %(message)s',
     level=logging.INFO,
     handlers=[
-        logging.FileHandler('../logs/debug.log', mode='a'),
+        logging.FileHandler(f'{root}/logs/debug.log', mode='a'),
         logging.StreamHandler(sys.stdout)]
     ) 
 
@@ -50,14 +52,12 @@ def train(X_train):
 
 def main():
     '''Train, evaluate and save model.'''
-    root = '../..' # Root Directory
     train_csv = f'{root}/data/train/df_full_train.csv'
     test_csv = f'{root}/data/test/df_test.csv'
-    model_path = f'{root}/models/ann_v1.h5'
-    ckpt_path = '../../models/checkpoints/ann_v1_{epoch:02d}_{val_root_mean_squared_error:.3f}.ckpt'
+    model_path = f'{root}/models/ann_v1.keras'
+    ckpt_path = '../../models/checkpoints/ann_v1_{epoch:02d}_{val_root_mean_squared_error:.3f}.keras'
     target = 'price'
 
-    # TODO: y values to be passed thru np.cbrt
     X_train, y_train, X_test, y_test = dataset(train_csv, test_csv, target, scaler=True)
     model = train(X_train)
     model.save(model_path)
@@ -76,8 +76,9 @@ def main():
         epochs=50,
         verbose=1,
         validation_data=(X_test,y_test),
-        callback=[checkpoint]
+        callbacks=[checkpoint]
     )
 
 if __name__ == '__main__':
-    history = train()
+    history = main()
+    
