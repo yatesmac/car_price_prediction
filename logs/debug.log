@@ -1,0 +1,12 @@
+2024-12-27 00:11:03,715 Training the final model using XGBoost Regression.
+2024-12-27 00:11:20,016 R2 Score = 0.939428448677063
+RMSE = 1839.5387900051555
+2024-12-27 00:11:20,016 Saving the model as a pickle file
+2024-12-27 00:11:20,019 Model saved successfully to ../../models/xgb.pkl 
+
+2025-01-03 21:44:52,067 Training the final model using XGBoost Regression.
+2025-01-03 21:45:24,430 R2 Score = 0.9409897327423096
+RMSE = 1484.9097113915457
+2025-01-03 21:45:24,431 Saving the model as a pickle file
+2025-01-03 21:45:24,444 Model saved successfully to ../../models/xgb.pkl 
+

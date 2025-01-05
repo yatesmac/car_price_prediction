@@ -75,7 +75,7 @@ def dataset(train_csv, test_csv, target: str, scaler: bool=False)\
     X_test = X_test[categorical + numerical + multi_label]
     
     if scaler:
-        X_train, X_test = scale(X_train, X_test)
+        X_train, X_test = scale(X_train, X_test, numerical)
     X_train, X_test = vectorize(X_train, X_test, multi_label)
     
     return X_train, y_train, X_test, y_test

@@ -57,6 +57,7 @@ def main():
     ckpt_path = '../../models/checkpoints/ann_v1_{epoch:02d}_{val_root_mean_squared_error:.3f}.ckpt'
     target = 'price'
 
+    # TODO: y values to be passed thru np.cbrt
     X_train, y_train, X_test, y_test = dataset(train_csv, test_csv, target, scaler=True)
     model = train(X_train)
     model.save(model_path)

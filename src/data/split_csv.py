@@ -63,16 +63,11 @@ def remove_outliers(df, target):
     Q1 = df[target].quantile(0.25)
     Q3 = df[target].quantile(0.75)
     IQR = Q3 - Q1
-    lower = Q1 - 1.5*IQR
-    upper = Q3 + 1.5*IQR
-
-    # Create arrays of Boolean values indicating the outlier rows
-    upper_array = np.where(df[target] >= upper)[0]
-    lower_array = np.where(df[target] <= lower)[0]
+    lower_range = Q1 - 1.5 * IQR
+    upper_range = Q3 + 1.5 * IQR
 
     # Removing the outliers
-    df.drop(index=upper_array, inplace=True)
-    df.drop(index=lower_array, inplace=True)
+    df = df[~((df[target] < lower_range) | (df[target] > upper_range))]
     return df
 
 
@@ -107,12 +102,13 @@ def split_save_data(df):
 
 def main():
     data = f'{root}/external/final_scout_not_dummy.csv'
+    target = 'price'
     
     df = pd.read_csv(data)
     df = remove_missing_data(df)
     df = remove_duplicates(df)
     df = format_column_names(df)
-#   df = remove_outliers(df, target)
+    df = remove_outliers(df, target)
 
     categorical, numerical, multi_label = categorize(df)
 
