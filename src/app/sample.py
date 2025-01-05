@@ -1,47 +1,30 @@
 '''sample.py Samples a single random row from test CSV file and writes it to a new CSV file.'''
 
-import csv
-import random
+
 import os
 
+import pandas as pd
+import numpy as np
 
-def generate_name():
+
+def generate_name(idx):
     '''Generate an incremental filename.'''
-    root = '../../data/test/random_rows'
-    base_name = f'{root}/sample'
+    base_name = 'sample'
     ext = 'csv'
-    counter = 1
-
-    while True:
-        output = f"{base_name}_{counter}.{ext}"
-        if not os.path.exists(output):
-            break
-        counter += 1
-
-    return output
-
+    return f"{base_name}_{idx}.{ext}"
 
 def sample_row_csv(input):
     '''Samples a single random row'''
-    try:
-        with open(input, 'r') as f_in:
-            reader = csv.reader(f_in)
-            rows = list(reader)  # Read all rows into a list
-
-        if not rows:
-            raise ValueError('Input CSV file is empty.')
-        
-        random_row = random.choice(rows)
-        output = generate_name()
-        with open(output, 'w', newline='') as f_out:
-            writer = csv.writer(f_out)
-            writer.writerow(random_row)
-
-    except FileNotFoundError:
-        print(f"Error: Input file '{input}' not found.")
-    except Exception as e:
-        print(f"An error occurred: {e}")
-
-    return output
+    df = pd.read_csv(input)
+    
+    while True:
+        root = '../../data/test/random_rows'
+        random_row = df.sample(n=1)
+        random_row_path = generate_name(random_row.index)
+        if not os.path.exists(f'{root}/{random_row_path}'):
+            break
+    
+    random_row.to_csv(random_row_path)
+    return random_row_path
     
 

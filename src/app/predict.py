@@ -15,9 +15,9 @@ def load_xgb(model_file):
     return model
 
 
-def load_ann(model_file, weights):
+def load_ann(model_file, weights=None):
     model = load_model(model_file)
-    model.load_weights(weights)
+#   model.load_weights(weights)
     return model
 
 
