@@ -36,19 +36,20 @@ def get_data():
 def main():
     url = 'http://localhost:9696/predict'
     
+    logger.info('\n Getiing Sample Data...')
     X, y = get_data()
-    sample_data = json.load(X)
+    sample_data = json.dumps(X.tolist())
     response = requests.post(url, json=sample_data)
 
     if response.status_code == 200:        
         ann = response.json()['ANN']
         xgb = response.json()['XGB']
         logger.info(
-            f'Actual Value: {y:.3f} \nPredictions: \nANN: {ann} \nXGB: {xgb}')
+            f'Actual Value: {float(y):.3f} \nPredictions: \nANN: {ann} \nXGB: {xgb}')
     else:
         logger.info(
             f'Failed to retrieve prediction. Status Code: {response.status_code} \n')
         
 
-if __name__ == '__name__':
+if __name__ == '__main__':
     main()
