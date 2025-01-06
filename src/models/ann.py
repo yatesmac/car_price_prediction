@@ -69,7 +69,7 @@ def main():
         mode='min'
     )
 
-    return model.fit(
+    history = model.fit(
         X_train,
         y_train,
         batch_size=4096,
@@ -78,7 +78,10 @@ def main():
         validation_data=(X_test,y_test),
         callbacks=[checkpoint]
     )
+    return history, model
 
 if __name__ == '__main__':
-    history = main()
+    weighted_model_path = f'{root}/models/wieghted_ann_v1.keras'
+    history, model = main()
+    model.save(weighted_model_path)
     
