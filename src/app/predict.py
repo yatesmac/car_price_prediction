@@ -6,8 +6,12 @@ import pickle
 import logging
 import sys
 
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 from flask import Flask, request, jsonify
+
+# sys.path lists directories that Python searches for modules to import
+sys.path.append('../data') 
+from data_preparation import dataset
 
 
 logger = logging.getLogger(__name__)
@@ -18,6 +22,14 @@ logging.basicConfig(
         logging.FileHandler('../../logs/debug.log', mode='a'),
         logging.StreamHandler(sys.stdout)]
     ) 
+
+
+def load_data(test_data):
+    root = '../../data' # Raw Data root director
+    train_csv = f'{root}/train/df_full_train.csv'
+    target = 'price'
+    _, _, X_test, y_test = dataset(train_csv, test_data, target, scaler=True)
+    return X_test, y_test
 
 
 def load_xgb(model_file):
@@ -62,9 +74,10 @@ def predict():
     ]
 
     data = request.get_json()
-    results = {}
+    X, y = load_data(test_data=data)
+    results = {'ACTUAL': float(y)}
     for name, model in models:
-        results[name] = evaluate(model, data)
+        results[name] = evaluate(model, X)
         
     return jsonify(results)
 

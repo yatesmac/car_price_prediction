@@ -1,4 +1,4 @@
-'''sample.py Samples a single random row from test CSV file and writes it to a new CSV file.'''
+'''sample.py Samples a single random row from test CSV file and writes it to a new CSV/JSON file.'''
 
 
 import os
@@ -21,10 +21,11 @@ logging.basicConfig(
 def generate_name(idx):
     '''Generate an incremental filename.'''
     base_name = 'row'
-    ext = 'csv'
+    # ext = 'csv'
+    ext = 'json'
     return f"{base_name}_{idx}.{ext}"
 
-def sample_row_csv(input):
+def sample_row(input):
     '''Samples a single random row'''
     # Take first 100 rows to sample from.
     df = pd.read_csv(input, nrows=100)
@@ -37,6 +38,7 @@ def sample_row_csv(input):
         if not os.path.exists(random_row_path):
             break
     
-    random_row.to_csv(random_row_path)
+    # random_row.to_csv(random_row_path)
+    random_row.to_json(random_row_path, orient='records', lines=True)
     logger.info(f'Generated Random Row: {random_row_name}')
     return random_row_path

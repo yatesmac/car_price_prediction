@@ -69,7 +69,7 @@ def main():
     test_csv = f'{root}/data/test/df_test.csv'
     target = 'price'
 
-    X_train, y_train, X_test, y_test = dataset(train_csv, test_csv, target)
+    X_train, y_train, X_test, y_test = dataset(train_csv, test_csv, target, scaler=True)
     model = train(X_train=X_train, y_train=y_train)
     r2, rmse = validate(model=model, X_test=X_test, y_test=y_test)
     logger.info(f'R2 Score = {r2}\nRMSE = {rmse}')

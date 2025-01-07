@@ -136,3 +136,235 @@ Stack trace:
 
 2025-01-06 20:53:01,724 Failed to retrieve prediction. Status Code: 500 
 
+2025-01-07 11:49:13,665 
+ Getiing Sample Data...
+2025-01-07 11:49:13,712 Generated Random Row: row_18.csv
+2025-01-07 11:49:23,713 Successfully loaded XGB Model.
+2025-01-07 11:49:24,135 Successfully loaded ANN Model.
+2025-01-07 11:49:24,180 Exception on /predict [POST]
+Traceback (most recent call last):
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/car_price_prediction/src/app/predict.py", line 67, in predict
+    results[name] = evaluate(model, data)
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/car_price_prediction/src/app/predict.py", line 40, in evaluate
+    prediction = model.predict(data)
+                 ^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/sklearn.py", line 1203, in predict
+    test = DMatrix(
+           ^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/core.py", line 726, in inner_f
+    return func(**kwargs)
+           ^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/core.py", line 878, in __init__
+    handle, feature_names, feature_types = dispatch_data_backend(
+                                           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/data.py", line 1179, in dispatch_data_backend
+    return _from_uri(data, missing, feature_names, feature_types, data_split_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/data.py", line 1079, in _from_uri
+    _check_call(_LIB.XGDMatrixCreateFromURI(config, ctypes.byref(handle)))
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/core.py", line 284, in _check_call
+    raise XGBoostError(py_str(_LIB.XGBGetLastError()))
+xgboost.core.XGBoostError: [11:49:24] /workspace/src/data/file_iterator.cc:27: Check failed: name_args.size() == 2 (1 vs. 2) : URI parameter `format` is required for loading text data: filename?format=csv
+Stack trace:
+  [bt] (0) /home/codespace/.local/lib/python3.12/site-packages/xgboost/lib/libxgboost.so(+0x22dcbc) [0x7cc436cb9cbc]
+  [bt] (1) /home/codespace/.local/lib/python3.12/site-packages/xgboost/lib/libxgboost.so(+0x4dd585) [0x7cc436f69585]
+  [bt] (2) /home/codespace/.local/lib/python3.12/site-packages/xgboost/lib/libxgboost.so(+0x49f654) [0x7cc436f2b654]
+  [bt] (3) /home/codespace/.local/lib/python3.12/site-packages/xgboost/lib/libxgboost.so(XGDMatrixCreateFromURI+0xfe) [0x7cc436bd0afe]
+  [bt] (4) /lib/x86_64-linux-gnu/libffi.so.7(+0x6ff5) [0x7cc4b476dff5]
+  [bt] (5) /lib/x86_64-linux-gnu/libffi.so.7(+0x640a) [0x7cc4b476d40a]
+  [bt] (6) /usr/local/python/3.12.1/lib/python3.12/lib-dynload/_ctypes.cpython-312-x86_64-linux-gnu.so(+0x13a46) [0x7cc4b4790a46]
+  [bt] (7) /usr/local/python/3.12.1/lib/python3.12/lib-dynload/_ctypes.cpython-312-x86_64-linux-gnu.so(+0xd0ca) [0x7cc4b478a0ca]
+  [bt] (8) python(_PyObject_MakeTpCall+0x90) [0x5a0fde29a5f0]
+
+
+2025-01-07 11:49:24,185 Failed to retrieve prediction. Status Code: 500 
+
+2025-01-07 11:53:46,882 Generated Random Row: row_36.csv
+2025-01-07 11:55:30,908 Generated Random Row: row_13.csv
+2025-01-07 11:59:08,397 Successfully loaded XGB Model.
+2025-01-07 11:59:08,483 Successfully loaded ANN Model.
+2025-01-07 11:59:08,485 Exception on /predict [POST]
+Traceback (most recent call last):
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/car_price_prediction/src/app/predict.py", line 67, in predict
+    results[name] = evaluate(model, data)
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/car_price_prediction/src/app/predict.py", line 40, in evaluate
+    prediction = model.predict(data)
+                 ^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/sklearn.py", line 1203, in predict
+    test = DMatrix(
+           ^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/core.py", line 726, in inner_f
+    return func(**kwargs)
+           ^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/core.py", line 878, in __init__
+    handle, feature_names, feature_types = dispatch_data_backend(
+                                           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/data.py", line 1179, in dispatch_data_backend
+    return _from_uri(data, missing, feature_names, feature_types, data_split_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/data.py", line 1079, in _from_uri
+    _check_call(_LIB.XGDMatrixCreateFromURI(config, ctypes.byref(handle)))
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/core.py", line 284, in _check_call
+    raise XGBoostError(py_str(_LIB.XGBGetLastError()))
+xgboost.core.XGBoostError: [11:59:08] /workspace/src/data/file_iterator.cc:27: Check failed: name_args.size() == 2 (1 vs. 2) : URI parameter `format` is required for loading text data: filename?format=csv
+Stack trace:
+  [bt] (0) /home/codespace/.local/lib/python3.12/site-packages/xgboost/lib/libxgboost.so(+0x22dcbc) [0x7cc436cb9cbc]
+  [bt] (1) /home/codespace/.local/lib/python3.12/site-packages/xgboost/lib/libxgboost.so(+0x4dd585) [0x7cc436f69585]
+  [bt] (2) /home/codespace/.local/lib/python3.12/site-packages/xgboost/lib/libxgboost.so(+0x49f654) [0x7cc436f2b654]
+  [bt] (3) /home/codespace/.local/lib/python3.12/site-packages/xgboost/lib/libxgboost.so(XGDMatrixCreateFromURI+0xfe) [0x7cc436bd0afe]
+  [bt] (4) /lib/x86_64-linux-gnu/libffi.so.7(+0x6ff5) [0x7cc4b476dff5]
+  [bt] (5) /lib/x86_64-linux-gnu/libffi.so.7(+0x640a) [0x7cc4b476d40a]
+  [bt] (6) /usr/local/python/3.12.1/lib/python3.12/lib-dynload/_ctypes.cpython-312-x86_64-linux-gnu.so(+0x13a46) [0x7cc4b4790a46]
+  [bt] (7) /usr/local/python/3.12.1/lib/python3.12/lib-dynload/_ctypes.cpython-312-x86_64-linux-gnu.so(+0xd0ca) [0x7cc4b478a0ca]
+  [bt] (8) python(_PyObject_MakeTpCall+0x90) [0x5a0fde29a5f0]
+
+
+2025-01-07 12:04:24,737 Successfully loaded XGB Model.
+2025-01-07 12:04:24,832 Successfully loaded ANN Model.
+2025-01-07 12:04:24,833 Exception on /predict [POST]
+Traceback (most recent call last):
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/car_price_prediction/src/app/predict.py", line 67, in predict
+    results[name] = evaluate(model, data)
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/car_price_prediction/src/app/predict.py", line 40, in evaluate
+    prediction = model.predict(data)
+                 ^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/sklearn.py", line 1203, in predict
+    test = DMatrix(
+           ^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/core.py", line 726, in inner_f
+    return func(**kwargs)
+           ^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/core.py", line 878, in __init__
+    handle, feature_names, feature_types = dispatch_data_backend(
+                                           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/data.py", line 1179, in dispatch_data_backend
+    return _from_uri(data, missing, feature_names, feature_types, data_split_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/data.py", line 1079, in _from_uri
+    _check_call(_LIB.XGDMatrixCreateFromURI(config, ctypes.byref(handle)))
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/core.py", line 284, in _check_call
+    raise XGBoostError(py_str(_LIB.XGBGetLastError()))
+xgboost.core.XGBoostError: [12:04:24] /workspace/src/data/file_iterator.cc:27: Check failed: name_args.size() == 2 (1 vs. 2) : URI parameter `format` is required for loading text data: filename?format=csv
+Stack trace:
+  [bt] (0) /home/codespace/.local/lib/python3.12/site-packages/xgboost/lib/libxgboost.so(+0x22dcbc) [0x7cc436cb9cbc]
+  [bt] (1) /home/codespace/.local/lib/python3.12/site-packages/xgboost/lib/libxgboost.so(+0x4dd585) [0x7cc436f69585]
+  [bt] (2) /home/codespace/.local/lib/python3.12/site-packages/xgboost/lib/libxgboost.so(+0x49f654) [0x7cc436f2b654]
+  [bt] (3) /home/codespace/.local/lib/python3.12/site-packages/xgboost/lib/libxgboost.so(XGDMatrixCreateFromURI+0xfe) [0x7cc436bd0afe]
+  [bt] (4) /lib/x86_64-linux-gnu/libffi.so.7(+0x6ff5) [0x7cc4b476dff5]
+  [bt] (5) /lib/x86_64-linux-gnu/libffi.so.7(+0x640a) [0x7cc4b476d40a]
+  [bt] (6) /usr/local/python/3.12.1/lib/python3.12/lib-dynload/_ctypes.cpython-312-x86_64-linux-gnu.so(+0x13a46) [0x7cc4b4790a46]
+  [bt] (7) /usr/local/python/3.12.1/lib/python3.12/lib-dynload/_ctypes.cpython-312-x86_64-linux-gnu.so(+0xd0ca) [0x7cc4b478a0ca]
+  [bt] (8) python(_PyObject_MakeTpCall+0x90) [0x5a0fde29a5f0]
+
+
+2025-01-07 12:53:53,716 Generated Random Row: row_87.csv
+2025-01-07 12:58:17,235 Generated Random Row: row_59.json
+2025-01-07 12:59:37,751 Generated Random Row: row_70.json
+2025-01-07 13:00:33,444 Successfully loaded XGB Model.
+2025-01-07 13:00:33,546 Successfully loaded ANN Model.
+2025-01-07 13:00:33,547 Exception on /predict [POST]
+Traceback (most recent call last):
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/car_price_prediction/src/app/predict.py", line 67, in predict
+    model_file_ann = f'{root}/ann_v1.keras'
+                        ^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/car_price_prediction/src/app/predict.py", line 40, in evaluate
+    return model
+                 
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/sklearn.py", line 1203, in predict
+    test = DMatrix(
+           ^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/core.py", line 726, in inner_f
+    return func(**kwargs)
+           ^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/core.py", line 878, in __init__
+    handle, feature_names, feature_types = dispatch_data_backend(
+                                           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/data.py", line 1239, in dispatch_data_backend
+    raise TypeError("Not supported type for data." + str(type(data)))
+TypeError: Not supported type for data.<class 'dict'>
+2025-01-07 13:06:12,607 Generated Random Row: row_26.json
+2025-01-07 13:06:37,691 Successfully loaded XGB Model.
+2025-01-07 13:06:37,773 Successfully loaded ANN Model.
+2025-01-07 13:06:37,774 Exception on /predict [POST]
+Traceback (most recent call last):
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/car_price_prediction/src/app/predict.py", line 67, in predict
+    model_file_ann = f'{root}/ann_v1.keras'
+                        ^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/car_price_prediction/src/app/predict.py", line 40, in evaluate
+    return model
+                 
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/sklearn.py", line 1203, in predict
+    test = DMatrix(
+           ^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/core.py", line 726, in inner_f
+    return func(**kwargs)
+           ^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/core.py", line 878, in __init__
+    handle, feature_names, feature_types = dispatch_data_backend(
+                                           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/xgboost/data.py", line 1239, in dispatch_data_backend
+    raise TypeError("Not supported type for data." + str(type(data)))
+TypeError: Not supported type for data.<class 'dict'>

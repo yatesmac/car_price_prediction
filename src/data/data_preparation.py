@@ -1,6 +1,7 @@
 '''data_preparation.py contain functions for data transformation, before model training.
 X_train, y_train, X_test, y_test are created using the dataset function.
 '''
+import json
 
 import pandas as pd
 import numpy as np
@@ -14,9 +15,20 @@ from sklearn.feature_extraction import DictVectorizer
 from flattencolumns import FlattenColumns
 
 
-def prepare_dataset(csv, target: str) -> tuple[pd.DataFrame, pd.Series]:
+def is_json(data):
+    try:
+        json.loads(data)
+    except ValueError as e:
+        return None
+    return True
+
+
+def prepare_dataset(data, target: str) -> tuple[pd.DataFrame, pd.Series]:
     '''Create X and y data given a the csv file.'''
-    df = pd.read_csv(csv)
+    if is_json(data):
+       df = pd.read_json(data)
+    else:
+        df = pd.read_csv(data)
     target = target
     y = df[target]
     X = df.drop(columns=target)

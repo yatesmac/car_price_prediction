@@ -6,10 +6,7 @@ import sys
 
 import requests
 
-from sample import sample_row_csv
-# sys.path lists directories that Python searches for modules to import
-sys.path.append('../data') 
-from data_preparation import dataset
+from sample import sample_row
 
 
 logger = logging.getLogger(__name__)
@@ -22,30 +19,26 @@ logging.basicConfig(
     )
 
 
-def get_data():
-    root = '../../data' # Raw Data root director
-    train_csv = f'{root}/train/df_full_train.csv'
-    test_csv = f'{root}/test/df_test.csv'
-    target = 'price'
-
-    sample_test_csv = sample_row_csv(test_csv)
-    _, _, X_test, y_test = dataset(train_csv, sample_test_csv, target, scaler=True)
-    return X_test, y_test
-
-
 def main():
     url = 'http://localhost:9696/predict'
     
+    root = '../../data' # Raw Data root director
+    test_csv = f'{root}/test/df_test.csv'
+    
+    sample_test_data = sample_row(test_csv)
+    # Open the JSON file with sample data
     logger.info('\n Getiing Sample Data...')
-    X, y = get_data()
-    sample_data = json.dumps(X.tolist())
+    with open(sample_test_data) as f:
+        sample_data = json.load(f)
+
     response = requests.post(url, json=sample_data)
 
     if response.status_code == 200:        
         ann = response.json()['ANN']
         xgb = response.json()['XGB']
+        actual = response.json()['ACTUAL']
         logger.info(
-            f'Actual Value: {float(y):.3f} \nPredictions: \nANN: {ann} \nXGB: {xgb}')
+            f'Actual Value: {actual:.3f} \nPredictions: \nANN: {ann:.3f} \nXGB: {xgb:.3f}')
     else:
         logger.info(
             f'Failed to retrieve prediction. Status Code: {response.status_code} \n')
