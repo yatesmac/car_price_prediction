@@ -25,10 +25,14 @@ def is_json(data):
 
 def prepare_dataset(data, target: str) -> tuple[pd.DataFrame, pd.Series]:
     '''Create X and y data given a the csv file.'''
+
     if is_json(data):
-       df = pd.read_json(data)
+        df = pd.read_json(data)
+    elif isinstance(data, dict):
+        df = pd.DataFrame.from_dict(data, orient='records')
     else:
         df = pd.read_csv(data)
+
     target = target
     y = df[target]
     X = df.drop(columns=target)
@@ -88,6 +92,8 @@ def dataset(train_csv, test_csv, target: str, scaler: bool=False)\
     
     if scaler:
         X_train, X_test = scale(X_train, X_test, numerical)
+    #   y_train = np.sqrt(y_train)
+    #   y_test = np.sqrt(y_test)
     X_train, X_test = vectorize(X_train, X_test, multi_label)
     
     return X_train, y_train, X_test, y_test

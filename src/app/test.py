@@ -19,17 +19,19 @@ logging.basicConfig(
     )
 
 
+def url_to_json(url):
+    escaped_string = url.replace("'", '"') 
+    return json.dumps({"url": escaped_string})
+
+
 def main():
     url = 'http://localhost:9696/predict'
     
     root = '../../data' # Raw Data root director
     test_csv = f'{root}/test/df_test.csv'
     
-    sample_test_data = sample_row(test_csv)
-    # Open the JSON file with sample data
-    logger.info('\n Getiing Sample Data...')
-    with open(sample_test_data) as f:
-        sample_data = json.load(f)
+    sample_url = sample_row(test_csv)
+    sample_data = url_to_json(sample_url)   
 
     response = requests.post(url, json=sample_data)
 

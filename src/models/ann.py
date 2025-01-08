@@ -32,7 +32,7 @@ logging.basicConfig(
 
 def train(X_train):
     '''Train a model using the provided data.'''
-    learning_rate = 0.01
+    learning_rate = 0.1
     optimizer = keras.optimizers.Adam(learning_rate=learning_rate)
     loss = keras.losses.MeanSquaredError()
     rmse = keras.metrics.RootMeanSquaredError()
@@ -55,12 +55,12 @@ def main():
     train_csv = f'{root}/data/train/df_full_train.csv'
     test_csv = f'{root}/data/test/df_test.csv'
     model_path = f'{root}/models/ann_v1.keras'
+    weighted_model_path = f'{root}/models/ann_v1.h5'
     ckpt_path = '../../models/checkpoints/ann_v1_{epoch:02d}_{val_root_mean_squared_error:.3f}.keras'
     target = 'price'
 
     X_train, y_train, X_test, y_test = dataset(train_csv, test_csv, target, scaler=True)
     model = train(X_train)
-    model.save(model_path)
 
     checkpoint = keras.callbacks.ModelCheckpoint(
         filepath=ckpt_path,
@@ -73,15 +73,18 @@ def main():
         X_train,
         y_train,
         batch_size=4096,
-        epochs=50,
+        epochs=45,
         verbose=1,
-        validation_data=(X_test,y_test),
-        callbacks=[checkpoint]
+    #   callbacks=[checkpoint],
+        validation_data=(X_test,y_test)
     )
-    return history, model
+    model.save(model_path)
+    model.save(weighted_model_path)
+    logger.info(f'Succesfully saved model to {weighted_model_path}.')
+    return history
+
 
 if __name__ == '__main__':
-    weighted_model_path = f'{root}/models/wieghted_ann_v1.keras'
-    history, model = main()
-    model.save(weighted_model_path)
+    history = main()
+    
     

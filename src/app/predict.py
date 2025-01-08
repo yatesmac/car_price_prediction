@@ -61,10 +61,10 @@ app = Flask(__name__)
 def predict():
 
     root = '../../models' # Models root directory
-    model_file_xgb = f'{root}/xgb.pkl'
+    model_file_xgb = f'{root}/xgb_v1.pkl'
     model_xgb = load_xgb(model_file_xgb)
 
-    model_file_ann = f'{root}/ann_v1.keras'
+    model_file_ann = f'{root}/ann_v1.h5'
     # weights = f'{root}/checkpoints/ann_v1_.ckpt'
     model_ann = load_ann(model_file_ann)
 
@@ -74,7 +74,7 @@ def predict():
     ]
 
     data = request.get_json()
-    X, y = load_data(test_data=data)
+    X, y = load_data(test_data=data['url'])
     results = {'ACTUAL': float(y)}
     for name, model in models:
         results[name] = evaluate(model, X)

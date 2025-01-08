@@ -21,8 +21,8 @@ logging.basicConfig(
 def generate_name(idx):
     '''Generate an incremental filename.'''
     base_name = 'row'
-    # ext = 'csv'
-    ext = 'json'
+    ext = 'csv'
+    # ext = 'json'
     return f"{base_name}_{idx}.{ext}"
 
 def sample_row(input):
@@ -38,7 +38,7 @@ def sample_row(input):
         if not os.path.exists(random_row_path):
             break
     
-    # random_row.to_csv(random_row_path)
-    random_row.to_json(random_row_path, orient='records', lines=True)
+    random_row.to_csv(random_row_path)
+    # random_row.to_csv(random_row_path, orient='records', lines=True)
     logger.info(f'Generated Random Row: {random_row_name}')
     return random_row_path
