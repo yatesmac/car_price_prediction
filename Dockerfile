@@ -8,6 +8,8 @@ RUN pip install -r requirements.txt
 
 COPY data ./data
 
+COPY logs ./logs
+
 COPY models ./models
 
 COPY src ./src

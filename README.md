@@ -3,6 +3,29 @@
 
 ![Dataset Cover](/img/dataset_cover.webp)
 
+<!-- TOC -->
+- [Car Price Prediction](#car-price-prediction)
+
+    - [Project Description](#project-description)
+    - [About the Dataset](#about-the-dataset)
+
+        - [Column Descriptions](#column-descriptions)
+        - [Key Features](#key-features)
+        - [Target Variable](#target-variable)
+
+    - [Project Structure](#project-structure)
+    - [Project Setup](#project-setup)
+
+        - [To reproduce the project without Docker](#to-reproduce-the-project-without-docker)
+
+    - [Containerization](#containerization)
+
+        - [To reproduce the project with Docker](#to-reproduce-the-project-with-docker)
+        
+    - [Results and Evaluation](#results-and-evaluation)
+    - [Acknowledgements](#acknowledgements)
+<!-- /TOC -->
+
 ## Project Description
 
 The goal of this project is to predict the price of a car. This is a regression problem.
@@ -84,72 +107,64 @@ The target variable in the dataset is price. The goal is to model car prices bas
 .
 ├── Dockerfile
 ├── README.md
-├── data                                : Directory containing 
+├── data                                # CSV Datasets 
 │   ├── external
 │   │   └── final_scout_not_dummy.csv   : CSV dataset downloaded from Kaggle
-│   ├── test                            :
-│   │   ├── df_test.csv
+│   ├── test                            
+│   │   ├── df_test.csv                 : Testing Dataset
 │   │   └── random_rows
-│   │       ├── row_3.csv
+│   │       ├── row_3.csv               : Random row sampled from Test CSV used with Flask App
 │   │       └── row_59.json
 │   └── train
-│       ├── df_full_train.csv
-│       ├── df_train.csv
-│       └── df_val.csv
+│       ├── df_full_train.csv           : Training + Validation Dataset
+│       ├── df_train.csv                : Training Dataset
+│       └── df_val.csv                  : Validation Dataset
 ├── img
 │   └── dataset_cover.webp
 ├── logs
 │   └── debug.log
-├── models
-│   ├── ann_v1.h5
+├── models                              # Models
+│   ├── ann_v1.h5                       : Neural Network Model - saved with weights
 │   ├── ann_v1.keras
-│   ├── rf_v1.pkl
-│   └── xgb_v1.pkl
-├── notebooks
-│   ├── 1_data_exploration.ipynb
-│   ├── 2_data_preparation.ipynb
-│   ├── 3_skl_xgb_models.ipynb
-│   └── 4_ann_model.ipynb
+│   ├── rf_v1.pkl                       : Random Forest Model
+│   └── xgb_v1.pkl                      : XGBoost Model
+├── notebooks                           # Notebooks
+│   ├── 1_data_exploration.ipynb        : Data Exploration with non-persistent changes
+│   ├── 2_data_preparation.ipynb        : Split Kaggle dataset to Training, Validation and Testing Datasets
+│   ├── 3_skl_xgb_models.ipynb          : Training and tuning SKLearn and XGB models
+│   └── 4_ann_model.ipynb               : Training and tuning neural network
 ├── pyproject.toml
 ├── requirements.txt
-└── src
+└── src                                 # Scripts
     ├── app
-    │   ├── predict.py
-    │   ├── sample.py
-    │   ├── test.py
+    │   ├── predict.py                  : Flask Application
+    │   ├── sample.py                   : Sample a single row from Test CSV
+    │   ├── test.py                     : Test Flask app using sampled data
     │   └── testing.ipynb
     ├── data
-    │   ├── data_preparation.py
-    │   ├── flattencolumns.py
-    │   └── split_csv.py
+    │   ├── data_preparation.py         : Prepare Training and Testing datatsets 
+    │   ├── flattencolumns.py           : Flatten multi-column columns for DictVectorization
+    │   └── split_csv.py                : Split Kaggle dataset to Training, Validation and Testing Datasets 
     └── models
-        ├── ann.py
-        ├── rf.py
-        └── xgb.py
+        ├── ann.py                      : Train and save Neural Net Model
+        ├── rf.py                       : Train and save Random Forest Model
+        └── xgb.py                      : Train and save XGB model
         
 ```
 
-The function of scripts in the `src` directory:
-
-```bash
-    src
-    ├── data_prep.py  <-- Prepare data before training
-    ├── predict.py    <-- Flask application
-    ├── test.py       <-- Test Flask application
-    └── train.py      <-- Train Logistic Regression model and save to Pickle file
-```
-
 ## Project Setup
+
+Note: This project was developed using Ubuntu in Github Codespaces. As such the code snippets below work in Linux-based environments. The Microsoft Windows implementation may differ.
 
 ### To reproduce the project (without Docker)
 
 1) Clone this repo in your local machine with the command:
 
     ```bash
-    git clone https://github.com/
+    git clone https://github.com/yatesmac/car_price_prediction.git
     ```
 
-1) Use the `cd` command to navigate to the main directory of the project `student_evaluation`
+1) Use the `cd` command to navigate to the main directory of the project `car_price_prediction`
 
 1) Create a virtual environment and activate it:
 
@@ -164,18 +179,29 @@ The function of scripts in the `src` directory:
     pip install -r requirements.txt
     ```
 
-1) Use the `cd` to navigate to the `src` directory and run the data preparation, and model training scripts:
+1) Use the `cd` to navigate to the `src` directory and run the data preparation in the `data` directory, and model training scripts in the `models` directory:
 
     ```bash
-    cd src
-    python data_prep.py
-    python train.python
+    cd src/data
+    python split_csv.py
+    
+    cd ../models
+    python ann.py
+    python rf.py
+    python xgb.py
     ```
 
 1) Start the flask application with `gunicorn`:
 
     ```bash
+    cd ../app
     gunicorn --bind 127.0.0.1:9696 predict:app
+    ```
+
+    Note: If the above command fails to start up a server, try running gunicorn as a python module:
+
+    ```bash
+    python -m gunicorn --bind 127.0.0.1:9696 predict:app
     ```
 
 1) Run the test script:
@@ -193,19 +219,19 @@ The function of scripts in the `src` directory:
 1) Build the Docker image from Dockerfile
 
     ```bash
-    docker build -t student-evaluation .
+    docker build -t car-prediction .
     ```
 
 1) Run the Docker container from the created image
 
     ```bash
-    docker run -it --rm -p 9696:9696 student-evaluation
+    docker run -it --rm -p 9696:9696 car-prediction
     ```
 
 1) Test the model. Navigate to project folder and run the test script from another terminal:
 
     ```bash
-    cd src
+    cd src/app
     python test.py
     ```
 

@@ -174,3 +174,6 @@ cython_debug/
 # They are deleted often in testing
 # *.csv
 # *.ckpt
+
+# The random forest model is too big to upload to Github
+rf_v1.plk 
