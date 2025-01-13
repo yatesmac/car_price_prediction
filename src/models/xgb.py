@@ -7,7 +7,6 @@ import os
 
 import numpy as np
 
-from sklearn.pipeline import Pipeline
 from sklearn.metrics import r2_score, root_mean_squared_error
 from xgboost import XGBRegressor
 

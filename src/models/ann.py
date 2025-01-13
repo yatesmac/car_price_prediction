@@ -73,7 +73,7 @@ def main():
         X_train,
         y_train,
         batch_size=4096,
-        epochs=45,
+        epochs=50,
         verbose=1,
     #   callbacks=[checkpoint],
         validation_data=(X_test,y_test)

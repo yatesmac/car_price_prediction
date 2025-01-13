@@ -1,4 +1,4 @@
-'''train.py - Train XGBoost Regression model and save to Pickle file.'''
+'''train.py - Train Random Forest Regression model and save to Pickle file.'''
 
 import pickle
 import logging
@@ -7,9 +7,8 @@ import os
 
 import numpy as np
 
-from sklearn.pipeline import Pipeline
 from sklearn.metrics import r2_score, root_mean_squared_error
-from xgboost import XGBRegressor
+from sklearn.ensemble import RandomForestRegressor
 
 # sys.path lists directories that Python searches for modules to import
 sys.path.append('../data') 
@@ -29,13 +28,13 @@ logging.basicConfig(
 def train(X_train, y_train):
     '''Train a model using the provided data.'''
     logger.info(
-        'Training the final model using XGBoost Regression.')
+        'Training the final model using Random Forest Regression.')
     params = {
-        'learning_rate': 0.2,
-        'max_depth': 5,
+        'max_depth': 20,
+        'min_samples_split': 2,
         'n_estimators': 200
        }
-    model = XGBRegressor(**params)
+    model = RandomForestRegressor(**params)
     return model.fit(X_train, y_train)
 
     
@@ -66,7 +65,7 @@ def save_model(model, model_file):
 def main():
     '''Train, evaluate and save model.'''
     root = '../..'
-    model_file = f'{root}/models/xgb_v1.pkl'
+    model_file = f'{root}/models/rf_v1.pkl'
     train_csv = f'{root}/data/train/df_full_train.csv'
     test_csv = f'{root}/data/test/df_test.csv'
     target = 'price'

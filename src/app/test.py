@@ -38,9 +38,10 @@ def main():
     if response.status_code == 200:        
         ann = response.json()['ANN']
         xgb = response.json()['XGB']
+        rf = response.json()['RF']
         actual = response.json()['ACTUAL']
         logger.info(
-            f'Actual Value: {actual:.3f} \nPredictions: \nANN: {ann:.3f} \nXGB: {xgb:.3f}')
+            f'\nActual Value: {actual:.2f} \nPredictions: \nNeural Net: {ann:.2f} \nRandom Forest: {rf:.2f} \nXG Boost: {xgb:.2f}')
     else:
         logger.info(
             f'Failed to retrieve prediction. Status Code: {response.status_code} \n')

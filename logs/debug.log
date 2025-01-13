@@ -405,3 +405,164 @@ RMSE = 1486.4394624139793
 2025-01-08 21:43:42,017 Generated Random Row: row_55.csv
 2025-01-08 21:43:42,034 Generated Random Row: row_66.csv
 2025-01-08 21:43:44,804 Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-01-12 22:54:02,294 You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`. 
+2025-01-12 22:54:02,334 Succesfully saved model to ../../models/ann_v1.h5.
+2025-01-12 22:54:26,991 Training the final model using XGBoost Regression.
+2025-01-12 22:59:35,568 You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`. 
+2025-01-12 22:59:35,607 Succesfully saved model to ../../models/ann_v1.h5.
+2025-01-12 23:00:26,959 Training the final model using XGBoost Regression.
+2025-01-12 23:01:17,289 R2 Score = 0.940868079662323
+RMSE = 1486.4394624139793
+2025-01-12 23:02:02,997 Training the final model using Random Forest Regression.
+2025-01-12 23:07:24,577 R2 Score = 0.9432043820778271
+RMSE = 1456.7789246622344
+2025-01-12 23:07:24,577 Saving the model as a pickle file
+2025-01-12 23:07:24,757 Model saved successfully to ../../models/rf_v1.pkl 
+
+2025-01-12 23:07:59,540 Training the final model using XGBoost Regression.
+2025-01-12 23:08:55,374 R2 Score = 0.940868079662323
+RMSE = 1486.4394624139793
+2025-01-12 23:08:55,375 Saving the model as a pickle file
+2025-01-12 23:08:55,381 Model saved successfully to ../../models/xgb_v1.pkl 
+
+2025-01-12 23:24:59,467 Generated Random Row: row_24.csv
+2025-01-12 23:25:05,544 Generated Random Row: row_71.csv
+2025-01-12 23:25:47,746 Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-01-12 23:39:09,775 Generated Random Row: row_36.csv
+2025-01-12 23:39:09,854 Successfully loaded Pickle Model.
+2025-01-12 23:39:10,072 Successfully loaded Pickle Model.
+2025-01-12 23:39:10,177 Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-01-12 23:39:10,181 Successfully loaded Keras Model.
+2025-01-12 23:39:10,182 Exception on /predict [POST]
+Traceback (most recent call last):
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/car_price_prediction/src/app/predict.py", line 82, in predict
+    X, y = load_data(test_data=data['url'])
+                               ~~~~^^^^^^^
+TypeError: string indices must be integers, not 'str'
+2025-01-12 23:39:10,184 Failed to retrieve prediction. Status Code: 500 
+
+2025-01-12 23:39:39,951 Successfully loaded Pickle Model.
+2025-01-12 23:39:39,991 Successfully loaded Pickle Model.
+2025-01-12 23:39:40,037 Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-01-12 23:39:40,040 Successfully loaded Keras Model.
+2025-01-12 23:39:40,040 Exception on /predict [POST]
+Traceback (most recent call last):
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/car_price_prediction/src/app/predict.py", line 82, in predict
+    X, y = load_data(test_data=data['url'])
+                               ~~~~^^^^^^^
+TypeError: string indices must be integers, not 'str'
+2025-01-12 23:53:16,032 Successfully loaded Pickle Model.
+2025-01-12 23:53:16,093 Successfully loaded Pickle Model.
+2025-01-12 23:53:16,158 Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-01-12 23:53:16,161 Successfully loaded Keras Model.
+2025-01-12 23:53:16,162 Exception on /predict [POST]
+Traceback (most recent call last):
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/car_price_prediction/src/app/predict.py", line 82, in predict
+    X, y = load_data(test_data=data['url'])
+                               ~~~~^^^^^^^
+TypeError: string indices must be integers, not 'str'
+2025-01-12 23:57:15,380 Successfully loaded Pickle Model.
+2025-01-12 23:57:15,580 Successfully loaded Pickle Model.
+2025-01-12 23:57:15,690 Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-01-12 23:57:15,694 Successfully loaded Keras Model.
+2025-01-12 23:57:15,695 Exception on /predict [POST]
+Traceback (most recent call last):
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/car_price_prediction/src/app/predict.py", line 86, in predict
+    X, y = load_data(test_data=data['url'])
+                               ~~~~^^^^^^^
+TypeError: string indices must be integers, not 'str'
+2025-01-12 23:59:37,271 Successfully loaded Pickle Model.
+2025-01-12 23:59:37,453 Successfully loaded Pickle Model.
+2025-01-12 23:59:37,546 Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-01-12 23:59:37,551 Successfully loaded Keras Model.
+2025-01-12 23:59:38,067 Evaluating...
+2025-01-12 23:59:38,073 Evaluating...
+2025-01-12 23:59:38,173 Evaluating...
+2025-01-13 00:00:57,497 Generated Random Row: row_42.csv
+2025-01-13 00:00:57,507 Successfully loaded Pickle Model.
+2025-01-13 00:00:57,541 Successfully loaded Pickle Model.
+2025-01-13 00:00:57,589 Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-01-13 00:00:57,591 Successfully loaded Keras Model.
+2025-01-13 00:00:58,108 Evaluating...
+2025-01-13 00:00:58,115 Evaluating...
+2025-01-13 00:00:58,197 Evaluating...
+2025-01-13 00:00:58,199 Actual Value: 23021.000 
+Predictions: 
+ANN: 23120.227 
+XGB: 24229.068
+2025-01-13 00:04:41,103 Generated Random Row: row_3.csv
+2025-01-13 00:04:41,121 Successfully loaded Pickle Model.
+2025-01-13 00:04:41,150 Successfully loaded Pickle Model.
+2025-01-13 00:04:41,192 Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-01-13 00:04:41,195 Successfully loaded Keras Model.
+2025-01-13 00:04:41,714 Evaluating...
+2025-01-13 00:04:41,742 Evaluating...
+2025-01-13 00:04:41,839 Evaluating...
+2025-01-13 00:04:41,840 
+Actual Value: 23600.00 
+Predictions: 
+ANN: 19845.28 
+RF: 22284.37 
+XGB: 21342.15
+2025-01-13 00:05:38,342 Generated Random Row: row_40.csv
+2025-01-13 00:05:38,356 Successfully loaded Pickle Model.
+2025-01-13 00:05:38,387 Successfully loaded Pickle Model.
+2025-01-13 00:05:38,433 Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-01-13 00:05:38,436 Successfully loaded Keras Model.
+2025-01-13 00:05:38,972 Evaluating...
+2025-01-13 00:05:38,999 Evaluating...
+2025-01-13 00:05:39,104 Evaluating...
+2025-01-13 00:05:39,105 
+Actual Value: 11950.00 
+Predictions: 
+Neural Net: 12011.90 
+Random Forest: 12145.46 
+XG Boost: 12889.13

@@ -5,6 +5,7 @@ Loads the XGBoost and Artificial Neural Network models and evaluates given data.
 import pickle
 import logging
 import sys
+import json
 
 from tensorflow.keras.models import load_model
 from flask import Flask, request, jsonify
@@ -32,18 +33,18 @@ def load_data(test_data):
     return X_test, y_test
 
 
-def load_xgb(model_file):
-    '''Load the pre-trained model and other necessary components'''
+def load_pickle(model_file):
+    '''Load the pre-trained pickle model and other necessary components'''
     with open(model_file, 'rb') as f:
         model = pickle.load(f)
-    logger.info('Successfully loaded XGB Model.')
+    logger.info('Successfully loaded Pickle Model.')
     return model
 
 
-def load_ann(model_file, weights=None):
+def load_keras(model_file, weights=None):
     model = load_model(model_file)
 #   model.load_weights(weights)
-    logger.info('Successfully loaded ANN Model.')
+    logger.info('Successfully loaded Keras Model.')
     return model
 
 
@@ -62,18 +63,24 @@ def predict():
 
     root = '../../models' # Models root directory
     model_file_xgb = f'{root}/xgb_v1.pkl'
-    model_xgb = load_xgb(model_file_xgb)
+    model_xgb = load_pickle(model_file_xgb)
+
+
+    model_file_rf = f'{root}/rf_v1.pkl'
+    model_rf = load_pickle(model_file_rf)
 
     model_file_ann = f'{root}/ann_v1.h5'
     # weights = f'{root}/checkpoints/ann_v1_.ckpt'
-    model_ann = load_ann(model_file_ann)
+    model_ann = load_keras(model_file_ann)
 
     models = [
+        ('RF', model_rf),
         ('XGB', model_xgb),
         ('ANN', model_ann)
     ]
 
     data = request.get_json()
+    data = json.loads(data)
     X, y = load_data(test_data=data['url'])
     results = {'ACTUAL': float(y)}
     for name, model in models:
