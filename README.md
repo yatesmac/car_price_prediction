@@ -4,26 +4,21 @@
 ![Dataset Cover](/img/dataset_cover.webp)
 
 <!-- TOC -->
-- [Car Price Prediction](#car-price-prediction)
 
+- [Car Price Prediction](#car-price-prediction)
     - [Project Description](#project-description)
     - [About the Dataset](#about-the-dataset)
-
         - [Column Descriptions](#column-descriptions)
         - [Key Features](#key-features)
         - [Target Variable](#target-variable)
-
     - [Project Structure](#project-structure)
     - [Project Setup](#project-setup)
-
         - [To reproduce the project without Docker](#to-reproduce-the-project-without-docker)
-
     - [Containerization](#containerization)
-
         - [To reproduce the project with Docker](#to-reproduce-the-project-with-docker)
-        
     - [Results and Evaluation](#results-and-evaluation)
     - [Acknowledgements](#acknowledgements)
+
 <!-- /TOC -->
 
 ## Project Description
@@ -210,6 +205,8 @@ Note: This project was developed using Ubuntu in Github Codespaces. As such the 
     python test.py
     ```
 
+Note: You may the comments to edit `test.py` to enable sampling of random rows, and see more results.
+
 ## Containerization
 
 ### To reproduce the project (with Docker)
@@ -237,9 +234,9 @@ Note: This project was developed using Ubuntu in Github Codespaces. As such the 
 
 ## Results and Evaluation
 
-Five models: Logistic Regression, Decision Tree, Random Rorest, Gradient Boosting and XGboost were trained on the dataset. Parameter tuning was done for each model and Logistic Regression was found to be the best performing model.
+Linear Regression, Decision Tree, Random Forest, Gradient Boosting, XGboost models were trained on the dataset. Parameter tuning was done for  the best performing models. Random Forest (RF) and XGBoost (XGB) had similar performance. An Artificial Neural Network (ANN) was also trained for comparison.
 
-The Logistic Regression model was thus train on the training and validation datasets, then saved. Afterwards, it was loaded into a webservice using Flask and deployed using a docker container.
+Thus RF,XGB and ANN were loaded into a webservice using Flask and deployed using a docker container to compare their performance. The Random Forest model found to be the most performant model.
 
 ## Acknowledgements
 

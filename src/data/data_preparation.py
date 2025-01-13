@@ -15,11 +15,14 @@ from sklearn.feature_extraction import DictVectorizer
 from flattencolumns import FlattenColumns
 
 
-def is_json(data):
+def is_json(data) -> bool:
+    '''Check if given file is JSON formated'''
     try:
         json.loads(data)
+
     except ValueError as e:
-        return None
+        return
+    
     return True
 
 
