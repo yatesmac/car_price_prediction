@@ -4,21 +4,24 @@
 ![Dataset Cover](/img/dataset_cover.webp)
 
 <!-- TOC -->
+- [Project Description](#project-description)
+- [About the Dataset](#about-the-dataset)
 
-- [Car Price Prediction](#car-price-prediction)
-    - [Project Description](#project-description)
-    - [About the Dataset](#about-the-dataset)
-        - [Column Descriptions](#column-descriptions)
-        - [Key Features](#key-features)
-        - [Target Variable](#target-variable)
-    - [Project Structure](#project-structure)
-    - [Project Setup](#project-setup)
-        - [To reproduce the project without Docker](#to-reproduce-the-project-without-docker)
-    - [Containerization](#containerization)
-        - [To reproduce the project with Docker](#to-reproduce-the-project-with-docker)
-    - [Results and Evaluation](#results-and-evaluation)
-    - [Acknowledgements](#acknowledgements)
+    - [Column Descriptions](#column-descriptions)
+    - [Key Features](#key-features)
+    - [Target Variable](#target-variable)
 
+- [Project Structure](#project-structure)
+- [Project Setup](#project-setup)
+
+    - [To reproduce the project without Docker](#to-reproduce-the-project-without-docker)
+
+- [Containerization](#containerization)
+
+    - [To reproduce the project with Docker](#to-reproduce-the-project-with-docker)
+
+- [Results and Evaluation](#results-and-evaluation)
+- [Acknowledgements](#acknowledgements)
 <!-- /TOC -->
 
 ## Project Description
@@ -49,52 +52,6 @@ The project involves the following steps:
 - in addition to these models, a neural network (Artificial Neural Net) is also trained for comparison
 - creating a web application with the final model using Flask and Gunicorn;
 - deploying the model locally with Docker.
-
-## About the Dataset
-
-The dataset is a real-world car pricing data from Auto Scout for analysis and price prediction. his dataset provides comprehensive details on used car listings, including vehicle specifications, features, pricing, and more. It's valuable for analyzing car prices, trends, and customer preferences in the automotive market.
-
-
-The dataset can be accessed on [Kaggle](https://www.kaggle.com/datasets/yaaryiitturan/auto-scout-car-price/data). A copy of the dataset has been added to the repo (in the *data/external* directory).
-
-### Column Descriptions
-
-|Attribute |Description |
-|----------|------------|
-|make_model |The brand and model of the vehicle (e.g., 'Audi A1'). |
-|body_type |The body style of the vehicle, such as Sedan, Compact, or Station Wagon. |
-|price |The listed price of the car in currency. |
-|vat |Indicates the VAT status for the vehicle's price (e.g., VAT deductible, Price negotiable). |
-|km |The total mileage (in kilometers) of the vehicle, indicating its usage. |
-|Type |Condition of the vehicle, whether it's 'Used' or 'New'. |
-|Fuel |Type of fuel the vehicle uses, such as 'Diesel', 'Benzine', etc. |
-|Gears |The number of gears in the vehicle's transmission. |
-|Comfort_Convenience |Comfort and convenience features, such as 'Air conditioning', 'Leather steering wheel', 'Cruise control', and more. |
-|Entertainment_Media |Media features available in the vehicle, including 'Bluetooth', 'MP3', 'Radio', etc. |
-|Extras |Additional features like 'Alloy wheels', 'Sport suspension', etc. |
-|Safety_Security | Safety features like 'ABS', 'Airbags', 'Electronic stability control', 'Isofix', etc. |
-|age |Age of the car (calculated based on the model year). |
-|Previous_Owners |The number of previous owners the car has had. |
-|hp_kW |Engine power in kilowatts (kW), indicating the performance capacity of the engine. |
-|Inspection_new |Indicates whether the car has recently undergone an inspection (1 for yes, 0 for no). |
-|Paint_Type |The type of paint on the car, such as 'Metallic', 'Matte', etc. |
-|Upholstery_type |The material used for the interior upholstery, such as 'Cloth', 'Leather', etc.|
-|Gearing_Type | The type of transmission the car uses, either 'Automatic' or 'Manual'. |
-|Displacement_cc |The engine displacement in cubic centimeters (cc), indicating the size of the engine.|
-|Weight_kg |The total weight of the vehicle in kilograms. |
-|Drive_chain |The type of drivetrain, indicating whether it's 'Front' or 'Rear' wheel drive. |
-|cons_comb |The combined fuel consumption in liters per 100 kilometers. |
-
-### Key Features
-
-- Vehicle Specifications: Covers details like make, model, body type, fuel type, and more.
-- Comfort & Safety Features: Includes information on air conditioning, safety features, and other convenience options.
-- Performance Metrics: Provides data on mileage, engine power, weight, and fuel consumption.
-- Pricing Information: Insights into vehicle pricing, VAT status, and other cost-related details.
-
-### Target Variable
-
-The target variable in the dataset is price. The goal is to model car prices based on the above key features (like mileage, fuel type, and performance).
 
 ## Project Structure
 
@@ -231,6 +188,52 @@ Note: You may the comments to edit `test.py` to enable sampling of random rows, 
     cd src/app
     python test.py
     ```
+
+## About the Dataset
+
+The dataset is a real-world car pricing data from Auto Scout for analysis and price prediction. his dataset provides comprehensive details on used car listings, including vehicle specifications, features, pricing, and more. It's valuable for analyzing car prices, trends, and customer preferences in the automotive market.
+
+
+The dataset can be accessed on [Kaggle](https://www.kaggle.com/datasets/yaaryiitturan/auto-scout-car-price/data). A copy of the dataset has been added to the repo (in the *data/external* directory).
+
+### Column Descriptions
+
+|Attribute |Description |
+|--------- |----------- |
+|Comfort_Convenience |Comfort and convenience features, such as 'Air conditioning', 'Leather steering wheel', 'Cruise control', and more. |
+|Entertainment_Media |Media features available in the vehicle, including 'Bluetooth', 'MP3', 'Radio', etc. |
+|Extras |Additional features like 'Alloy wheels', 'Sport suspension', etc. |
+|Safety_Security | Safety features like 'ABS', 'Airbags', 'Electronic stability control', 'Isofix', etc. |
+|age |Age of the car (calculated based on the model year). |
+|Previous_Owners |The number of previous owners the car has had. |
+|hp_kW |Engine power in kilowatts (kW), indicating the performance capacity of the engine. |
+|Inspection_new |Indicates whether the car has recently undergone an inspection (1 for yes, 0 for no). |
+|Paint_Type |The type of paint on the car, such as 'Metallic', 'Matte', etc. |
+|Upholstery_type |The material used for the interior upholstery, such as 'Cloth', 'Leather', etc.|
+|Gearing_Type | The type of transmission the car uses, either 'Automatic' or 'Manual'. |
+|Displacement_cc |The engine displacement in cubic centimeters (cc), indicating the size of the engine.|
+|Weight_kg |The total weight of the vehicle in kilograms. |
+|Drive_chain |The type of drivetrain, indicating whether it's 'Front' or 'Rear' wheel drive. |
+|cons_comb |The combined fuel consumption in liters per 100 kilometers. |
+|make_model |The brand and model of the vehicle (e.g., 'Audi A1'). |
+|body_type |The body style of the vehicle, such as Sedan, Compact, or Station Wagon. |
+|price |The listed price of the car in currency. |
+|vat |Indicates the VAT status for the vehicle's price (e.g., VAT deductible, Price negotiable). |
+|km |The total mileage (in kilometers) of the vehicle, indicating its usage. |
+|Type |Condition of the vehicle, whether it's 'Used' or 'New'. |
+|Fuel |Type of fuel the vehicle uses, such as 'Diesel', 'Benzine', etc. |
+|Gears |The number of gears in the vehicle's transmission. |
+
+### Key Features
+
+- Vehicle Specifications: Covers details like make, model, body type, fuel type, and more.
+- Comfort & Safety Features: Includes information on air conditioning, safety features, and other convenience options.
+- Performance Metrics: Provides data on mileage, engine power, weight, and fuel consumption.
+- Pricing Information: Insights into vehicle pricing, VAT status, and other cost-related details.
+
+### Target Variable
+
+The target variable in the dataset is price. The goal is to model car prices based on the above key features (like mileage, fuel type, and performance).
 
 ## Results and Evaluation
 
