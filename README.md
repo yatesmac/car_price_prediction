@@ -5,21 +5,15 @@
 
 <!-- TOC -->
 - [Project Description](#project-description)
+- [Project Structure](#project-structure)
+- [Project Setup](#project-setup)
+    - [To reproduce the project without Docker](#to-reproduce-the-project-without-docker)
+- [Containerization](#containerization)
+    - [To reproduce the project with Docker](#to-reproduce-the-project-with-docker)
 - [About the Dataset](#about-the-dataset)
-
     - [Column Descriptions](#column-descriptions)
     - [Key Features](#key-features)
     - [Target Variable](#target-variable)
-
-- [Project Structure](#project-structure)
-- [Project Setup](#project-setup)
-
-    - [To reproduce the project without Docker](#to-reproduce-the-project-without-docker)
-
-- [Containerization](#containerization)
-
-    - [To reproduce the project with Docker](#to-reproduce-the-project-with-docker)
-
 - [Results and Evaluation](#results-and-evaluation)
 - [Acknowledgements](#acknowledgements)
 <!-- /TOC -->
